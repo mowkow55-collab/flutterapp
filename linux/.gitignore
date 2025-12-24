@@ -1,0 +1,18 @@
+# Flutter
+build/
+.dart_tool/
+
+# Android
+android/.gradle/
+android/local.properties
+
+# iOS
+ios/Pods/
+ios/.symlinks/
+
+# IDE
+.idea/
+.vscode/
+
+# Env
+.env
