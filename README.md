@@ -1,4 +1,4 @@
-# book_haven
+# BOOKIFY
 
 A new Flutter project.
 
