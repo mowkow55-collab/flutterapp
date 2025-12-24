@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:uuid/uuid.dart';
 import '../cubits/cart_cubit.dart';
+import '../../../profile/domain/entities/order_entity.dart';
+import '../../../profile/presentation/cubits/order_cubit.dart';
 
 class CheckoutPage extends StatelessWidget {
   const CheckoutPage({super.key});
@@ -58,8 +61,20 @@ class CheckoutPage extends StatelessWidget {
                 const SizedBox(height: 24),
                 ElevatedButton(
                   onPressed: () {
-                    // Implement Checkout Logic (e.g. Save to DB)
-                    // For now, just clear cart and show success
+                    final cartState = context.read<CartCubit>().state;
+                    
+                    // Create Order
+                    final order = OrderEntity(
+                      id: const Uuid().v4(),
+                      items: List.from(cartState.items),
+                      totalAmount: cartState.totalAmount,
+                      date: DateTime.now(),
+                    );
+                    
+                    // Save Order
+                    context.read<OrderCubit>().addOrder(order);
+                    
+                    // Clear cart
                     context.read<CartCubit>().clearCart();
                     
                     showDialog(
@@ -71,7 +86,7 @@ class CheckoutPage extends StatelessWidget {
                           TextButton(
                             onPressed: () {
                               context.pop(); // Close dialog
-                              context.go('/home'); // Go home
+                              context.pushReplacement('/order-details', extra: order);
                             },
                             child: const Text('OK'),
                           ),

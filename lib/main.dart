@@ -7,6 +7,7 @@ import 'core/theme/cubit/theme_cubit.dart';
 import 'features/auth/presentation/cubits/auth_cubit.dart';
 import 'features/books/presentation/cubits/books_cubit.dart';
 import 'features/cart/presentation/cubits/cart_cubit.dart';
+import 'features/profile/presentation/cubits/order_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ class BookifyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.sl<AuthCubit>()),
         BlocProvider(create: (_) => di.sl<BooksCubit>()),
         BlocProvider(create: (_) => di.sl<CartCubit>()),
+        BlocProvider(create: (_) => di.sl<OrderCubit>()),
         BlocProvider(create: (_) => ThemeCubit()),
       ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(

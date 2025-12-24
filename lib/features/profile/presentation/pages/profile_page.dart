@@ -41,7 +41,7 @@ class ProfilePage extends StatelessWidget {
                   ListTile(
                     leading: const Icon(Icons.history),
                     title: const Text('Order History'),
-                    onTap: () {}, // TODO
+                    onTap: () => context.push('/orders'),
                   ),
                   const SizedBox(height: 32),
                   ElevatedButton.icon(

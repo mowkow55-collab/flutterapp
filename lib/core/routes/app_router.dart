@@ -9,6 +9,9 @@ import '../../features/books/domain/entities/book_entity.dart';
 import '../../features/cart/presentation/pages/cart_page.dart';
 import '../../features/cart/presentation/pages/checkout_page.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
+import '../../features/profile/presentation/pages/orders_page.dart';
+import '../../features/profile/presentation/pages/order_details_page.dart';
+import '../../features/profile/domain/entities/order_entity.dart';
 import '../../features/splash/presentation/pages/splash_page.dart';
 import '../../features/settings/presentation/pages/settings_page.dart';
 
@@ -55,6 +58,17 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/settings',
       builder: (context, state) => const SettingsPage(),
+    ),
+    GoRoute(
+      path: '/orders',
+      builder: (context, state) => const OrdersPage(),
+    ),
+    GoRoute(
+      path: '/order-details',
+      builder: (context, state) {
+        final order = state.extra as OrderEntity;
+        return OrderDetailsPage(order: order);
+      },
     ),
   ],
 );

@@ -10,6 +10,7 @@ import '../../features/books/data/repositories/books_repository_impl.dart';
 import '../../features/books/domain/repositories/books_repository.dart';
 import '../../features/books/presentation/cubits/books_cubit.dart';
 import '../../features/cart/presentation/cubits/cart_cubit.dart';
+import '../../features/profile/presentation/cubits/order_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -52,6 +53,9 @@ Future<void> init() async {
   
   // ! Features - Cart
   sl.registerFactory(() => CartCubit());
+
+  // ! Features - Profile
+  sl.registerFactory(() => OrderCubit());
 }
 
 // void _initAuth() {
