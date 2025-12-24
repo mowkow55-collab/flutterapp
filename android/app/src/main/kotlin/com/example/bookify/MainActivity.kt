@@ -1,4 +1,4 @@
-package com.example.book_haven
+package com.example.bookify
 
 import io.flutter.embedding.android.FlutterActivity
 

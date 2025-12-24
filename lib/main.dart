@@ -13,11 +13,11 @@ void main() async {
   
   await di.init();
   
-  runApp(const BookHavenApp());
+  runApp(const BookifyApp());
 }
 
-class BookHavenApp extends StatelessWidget {
-  const BookHavenApp({super.key});
+class BookifyApp extends StatelessWidget {
+  const BookifyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class BookHavenApp extends StatelessWidget {
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, themeMode) {
           return MaterialApp.router(
-            title: 'Book Haven',
+            title: 'BOOKIFY',
             debugShowCheckedModeBanner: false,
             theme: AppTheme.lightTheme,
             darkTheme: AppTheme.darkTheme,

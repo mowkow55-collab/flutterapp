@@ -1,6 +1,6 @@
 {
-    "name": "book_haven",
-    "short_name": "book_haven",
+    "name": "BOOKIFY",
+    "short_name": "BOOKIFY",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

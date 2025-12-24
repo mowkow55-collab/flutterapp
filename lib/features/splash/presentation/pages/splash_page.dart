@@ -24,10 +24,11 @@ class SplashPage extends StatelessWidget {
               const Icon(Icons.menu_book_rounded, size: 80, color: Colors.blue),
               const SizedBox(height: 24),
               Text(
-                'Book Haven',
+                'BOOKIFY',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Colors.blue,
+                      letterSpacing: 2.0,
                     ),
               ),
               const SizedBox(height: 24),

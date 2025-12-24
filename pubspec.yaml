@@ -1,5 +1,5 @@
-name: book_haven
-description: A Book Store Flutter application.
+name: bookify
+description: BOOKIFY - Your Premium Book Store.
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -33,6 +33,24 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   mocktail: ^1.0.0
   bloc_test: ^9.1.5
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_icon.jpg"
+  web:
+    generate: true
+    image_path: "assets/images/app_icon.jpg"
+  windows:
+    generate: true
+    image_path: "assets/images/app_icon.jpg"
+  macos:
+    generate: true
+    image_path: "assets/images/app_icon.jpg"
+  linux:
+    generate: true
+    image_path: "assets/images/app_icon.jpg"
 
 flutter:
   uses-material-design: true
