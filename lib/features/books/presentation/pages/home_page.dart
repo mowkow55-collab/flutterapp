@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String selectedGenre = 'All';
+  String searchQuery = '';
   final List<String> genres = ['All', 'Fiction', 'Sci-Fi', 'Biography', 'History', 'Technology'];
 
   @override
@@ -34,9 +35,16 @@ class _HomePageState extends State<HomePage> {
                 return const Center(child: Text('No books available.'));
               }
 
-              final filteredBooks = selectedGenre == 'All' 
+              final booksByGenre = selectedGenre == 'All' 
                   ? state.books 
                   : state.books.where((book) => book.genre == selectedGenre).toList();
+
+              final filteredBooks = searchQuery.isEmpty
+                  ? booksByGenre
+                  : booksByGenre.where((book) => 
+                      book.title.toLowerCase().contains(searchQuery.toLowerCase()) || 
+                      book.author.toLowerCase().contains(searchQuery.toLowerCase())
+                    ).toList();
               
               // Simple logic for featured: Top rated > 4.5
               final featuredBooks = state.books.where((b) => (b.rating ?? 0) > 4.5).toList();
@@ -46,8 +54,6 @@ class _HomePageState extends State<HomePage> {
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -80,10 +86,34 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ],
                       ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Search books...',
+                          prefixIcon: const Icon(Icons.search),
+                          suffixIcon: searchQuery.isNotEmpty
+                              ? IconButton(
+                                  icon: const Icon(Icons.clear),
+                                  onPressed: () => setState(() => searchQuery = ''),
+                                )
+                              : null,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                          fillColor: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                        ),
+                        onChanged: (value) => setState(() => searchQuery = value),
                       ),
                     ),
                   ),
-                  if (featuredBooks.isNotEmpty) ...[
+                  if (featuredBooks.isNotEmpty && searchQuery.isEmpty) ...[
                      SliverToBoxAdapter(
                       child: Padding(
                          padding: const EdgeInsets.symmetric(horizontal: 16.0),

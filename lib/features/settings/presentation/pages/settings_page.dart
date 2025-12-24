@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/theme/cubit/theme_cubit.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Watch the current theme mode to update the switch state
+    final currentThemeMode = context.watch<ThemeCubit>().state;
+    // Determine if it is dark. If system, check platform brightness, but for simplicity let's rely on the explicit mode or platform.
+    // Simplifying: if mode is dark, switch is on.
+    final isDark = currentThemeMode == ThemeMode.dark || 
+        (currentThemeMode == ThemeMode.system && MediaQuery.of(context).platformBrightness == Brightness.dark);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Settings'),
@@ -29,7 +38,12 @@ class SettingsPage extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.dark_mode_outlined),
             title: const Text('Dark Mode'),
-            trailing: Switch(value: Theme.of(context).brightness == Brightness.dark, onChanged: (val) {}),
+            trailing: Switch(
+              value: isDark,
+              onChanged: (val) {
+                context.read<ThemeCubit>().toggleTheme(val);
+              },
+            ),
           ),
           const Divider(),
           ListTile(
